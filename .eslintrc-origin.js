@@ -96,8 +96,20 @@ module.exports = {
         math: "always"
       }
     ],
-    "@typescript-eslint/no-unused-vars": "off",
-    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_"
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_"
+      }
+    ],
     "prettier/prettier": [
       "error",
       {
