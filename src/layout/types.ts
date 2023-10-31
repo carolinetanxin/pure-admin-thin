@@ -1,15 +1,18 @@
 import type { IconifyIcon } from "@iconify/vue";
+const { VITE_HIDE_HOME } = import.meta.env;
 
-export const routerArrays: Array<RouteConfigs> = [
-  {
-    path: "/welcome",
-    parentPath: "/",
-    meta: {
-      title: "menus.hshome",
-      icon: "homeFilled"
-    }
-  }
-];
+export const routerArrays: Array<RouteConfigs> =
+  VITE_HIDE_HOME === "false"
+    ? [
+        {
+          path: "/welcome",
+          meta: {
+            title: "menus.hshome",
+            icon: "homeFilled"
+          }
+        }
+      ]
+    : [];
 
 export type routeMetaType = {
   title?: string;
@@ -21,7 +24,6 @@ export type routeMetaType = {
 
 export type RouteConfigs = {
   path?: string;
-  parentPath?: string;
   query?: object;
   params?: object;
   meta?: routeMetaType;
@@ -58,20 +60,23 @@ export interface setType {
   hideTabs: boolean;
 }
 
-export type childrenType = {
+export type menuType = {
+  id?: number;
   path?: string;
   noShowingChildren?: boolean;
-  children?: childrenType[];
+  children?: menuType[];
   value: unknown;
   meta?: {
     icon?: string;
     title?: string;
+    rank?: number;
     showParent?: boolean;
     extraIcon?: string;
   };
   showTooltip?: boolean;
   parentId?: number;
   pathList?: number[];
+  redirect?: string;
 };
 
 export type themeColorsType = {

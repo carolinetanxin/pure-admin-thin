@@ -22,19 +22,31 @@ notices.value.map(v => (noticesNum.value += v.list.length));
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-tabs :stretch="true" v-model="activeKey" class="dropdown-tabs">
-          <template v-for="item in notices" :key="item.key">
-            <el-tab-pane
-              :label="`${item.name}(${item.list.length})`"
-              :name="`${item.key}`"
-            >
-              <el-scrollbar max-height="330px">
-                <div class="noticeList-container">
-                  <NoticeList :list="item.list" />
-                </div>
-              </el-scrollbar>
-            </el-tab-pane>
-          </template>
+        <el-tabs
+          :stretch="true"
+          v-model="activeKey"
+          class="dropdown-tabs"
+          :style="{ width: notices.length === 0 ? '200px' : '330px' }"
+        >
+          <el-empty
+            v-if="notices.length === 0"
+            description="暂无消息"
+            :image-size="60"
+          />
+          <span v-else>
+            <template v-for="item in notices" :key="item.key">
+              <el-tab-pane
+                :label="`${item.name}(${item.list.length})`"
+                :name="`${item.key}`"
+              >
+                <el-scrollbar max-height="330px">
+                  <div class="noticeList-container">
+                    <NoticeList :list="item.list" />
+                  </div>
+                </el-scrollbar>
+              </el-tab-pane>
+            </template>
+          </span>
         </el-tabs>
       </el-dropdown-menu>
     </template>
@@ -46,8 +58,9 @@ notices.value.map(v => (noticesNum.value += v.list.length));
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
   height: 48px;
-  width: 60px;
+  margin-right: 10px;
   cursor: pointer;
 
   .header-notice-icon {
@@ -56,10 +69,8 @@ notices.value.map(v => (noticesNum.value += v.list.length));
 }
 
 .dropdown-tabs {
-  width: 330px;
-
   .noticeList-container {
-    padding: 15px 24px 0 24px;
+    padding: 15px 24px 0;
   }
 
   :deep(.el-tabs__header) {
@@ -71,7 +82,7 @@ notices.value.map(v => (noticesNum.value += v.list.length));
   }
 
   :deep(.el-tabs__nav-wrap) {
-    padding: 0 36px 0 36px;
+    padding: 0 36px;
   }
 }
 </style>

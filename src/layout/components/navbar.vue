@@ -18,6 +18,7 @@ const {
   onPanel,
   pureApp,
   username,
+  userAvatar,
   avatarsStyle,
   toggleSideBar,
   getDropdownItemStyle,
@@ -85,10 +86,7 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
       <!-- 退出登录 -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link navbar-bg-hover select-none">
-          <img
-            src="https://avatars.githubusercontent.com/u/44761321?v=4"
-            :style="avatarsStyle"
-          />
+          <img :src="userAvatar" :style="avatarsStyle" />
           <p v-if="username" class="dark:text-white">{{ username }}</p>
         </span>
         <template #dropdown>
@@ -121,28 +119,28 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
   overflow: hidden;
 
   .hamburger-container {
-    line-height: 48px;
-    height: 100%;
     float: left;
+    height: 100%;
+    line-height: 48px;
     cursor: pointer;
   }
 
   .vertical-header-right {
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
     min-width: 280px;
     height: 48px;
-    align-items: center;
     color: #000000d9;
-    justify-content: flex-end;
 
     .el-dropdown-link {
-      height: 48px;
-      padding: 10px;
       display: flex;
       align-items: center;
       justify-content: space-around;
-      cursor: pointer;
+      height: 48px;
+      padding: 10px;
       color: #000000d9;
+      cursor: pointer;
 
       p {
         font-size: 14px;
@@ -182,9 +180,9 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
   max-width: 120px;
 
   ::v-deep(.el-dropdown-menu__item) {
-    min-width: 100%;
     display: inline-flex;
     flex-wrap: wrap;
+    min-width: 100%;
   }
 }
 </style>
